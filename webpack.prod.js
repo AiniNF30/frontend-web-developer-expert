@@ -1,5 +1,5 @@
 /* eslint-disable prefer-regex-literals */
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const common = require('./webpack.common');
 
