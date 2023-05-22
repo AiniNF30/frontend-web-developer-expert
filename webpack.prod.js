@@ -1,9 +1,9 @@
 /* eslint-disable prefer-regex-literals */
-import { merge } from 'webpack-merge';
-import { GenerateSW } from 'workbox-webpack-plugin';
-import common from './webpack.common';
+const merge = require('webpack-merge');
+const { GenerateSW } = require('workbox-webpack-plugin');
+const common = require('./webpack.common');
 
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   module: {
