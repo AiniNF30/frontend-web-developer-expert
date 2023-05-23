@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { strictEqual } from 'assert';
+const assert = require('assert').strict;
 
 Feature('Liking Restaurant');
 
@@ -17,35 +17,46 @@ Scenario('showing empty favorite restaurant', async ({ I }) => {
   );
 });
 
+Scenario('liking one restaurant', async ({ I }) => {
+  I.amOnPage('/');
+  I.waitForElement('.restaurant-item__content');
+  I.click('.restaurant-item__content');
+  I.waitForClickable('#likeButton');
+  I.click('#likeButton');
+});
+
 Scenario('unliking one restaurant', async ({ I }) => {
   I.amOnPage('/#/favorite');
   I.waitForElement('.restaurant-item__not__found');
-  I.amOnPage('/');
+
+  I.amOnPage('/#');
   I.waitForElement('h2 a');
   I.click(locate('h2 a').first());
+
   I.waitForElement('#likeButton');
   I.click('#likeButton');
-  I.amOnPage('/#/like');
+
+  I.amOnPage('/#/favorite');
   I.waitForElement('h2 a');
   I.click(locate('h2 a').first());
   I.waitForElement('[aria-label="unlike this restaurant"]');
   I.click('[aria-label="unlike this restaurant"]');
-  I.amOnPage('/#/like');
+
+  I.amOnPage('/#/favorite');
   I.waitForElement('.restaurant-item__not__found');
 });
 
 Scenario('Customer review', async ({ I }) => {
-  I.seeElement('.restaurant-item');
-  I.click(locate('.restaurant-item__content').first());
+  I.waitForElement('h2 a');
+  I.click(locate('h2 a').first());
 
-  I.seeElement('.form-review form');
+  const reviewText = 'Uenakk';
+  I.waitForElement('.form-review form');
   I.fillField('inputName', 'test review');
   I.fillField('inputReview', reviewText);
   I.click('#submit-review');
 
-  I.waitForResponse('https://restaurant-api.dicoding.dev/review');
-  const lastReview = locate('.customer__review').last();
+  const lastReview = locate('.desc_review').last();
   const lastReviewText = await I.grabTextFrom(lastReview);
-
   assert.strictEqual(reviewText, lastReviewText.trim());
 });
