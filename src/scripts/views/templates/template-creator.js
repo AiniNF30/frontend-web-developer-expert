@@ -66,7 +66,7 @@ const createRestaurantItemTemplate = (restaurant) => `
 }" alt="Suasana di ${
   restaurant.name
 }" crossorigin="anonymous">            
-            <h2><a class="restaurant-item__content" href="${`/#/detail/${restaurant.id}`}">${
+            <h2 class="restaurant-item__content"><a href="${`/#/detail/${restaurant.id}`}">${
   restaurant.name
 }</a></h2>    
                 <div class="detail__item">
