@@ -59,14 +59,14 @@ const createRestaurantDetailTemplate = (restaurant) => `
 const createRestaurantItemTemplate = (restaurant) => `
         <article tabindex="0" class="restaurant-item">
             <div class="restaurant-item__header"> 
-            <img class="lazyload" src="${
+            <img class="lazyload" data-src="${
   restaurant.pictureId
     ? CONFIG.BASE_IMAGE_URL + restaurant.pictureId
     : 'https://picsum.photos/id/666/800/450?grayscale'
 }" alt="Suasana di ${
   restaurant.name
 }" crossorigin="anonymous">            
-            <h2><a class="restaurant-item__content" href="${`/#/detail/${restaurant.id}`}">${
+            <h2 class="restaurant-item__content"><a href="${`/#/detail/${restaurant.id}`}">${
   restaurant.name
 }</a></h2>    
                 <div class="detail__item">

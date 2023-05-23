@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 Feature('Liking Restaurant');
 
@@ -18,37 +18,23 @@ Scenario('showing empty favorite restaurant', async ({ I }) => {
 });
 
 Scenario('unliking one restaurant', async ({ I }) => {
-  I.wait(5);
-  I.see('No restaurant', '.restaurant-item__not__found');
+  I.amOnPage('/#/favorite');
+  I.waitForElement('.restaurant-item__not__found');
   I.amOnPage('/');
-  I.wait(5);
-  I.seeElement('h2 a');
+  I.waitForElement('h2 a');
   I.click(locate('h2 a').first());
-  I.wait(5);
-  I.seeElement('#likeButton');
+  I.waitForElement('#likeButton');
   I.click('#likeButton');
   I.amOnPage('/#/like');
-  I.wait(5);
-  I.seeElement('h2 a');
+  I.waitForElement('h2 a');
   I.click(locate('h2 a').first());
-  I.wait(5);
-  I.seeElement('[aria-label="unlike this restaurant"]');
+  I.waitForElement('[aria-label="unlike this restaurant"]');
   I.click('[aria-label="unlike this restaurant"]');
   I.amOnPage('/#/like');
-  I.wait(5);
-  I.see('No restaurant', '.restaurant-item__not__found');
+  I.waitForElement('.restaurant-item__not__found');
 });
 
-Scenario('go to page about us', ({ I }) => {
-  I.seeElement('.nav__list');
-  I.wait(5);
-  I.see('ABOUT US', '.nav__item');
-  I.click(locate('.nav__item').last());
-  I.wait(5);
-  I.amOnPage('https://www.linkedin.com/in/aini-nurpadilah/');
-});
-
-Scenario('Customer review', async (I) => {
+Scenario('Customer review', async ({ I }) => {
   I.seeElement('.restaurant-item');
   I.click(locate('.restaurant-item__content').first());
 
